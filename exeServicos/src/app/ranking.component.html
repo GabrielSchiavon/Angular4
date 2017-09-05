@@ -1,0 +1,57 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <h1>
+      Ranking de Equipe
+    </h1>
+  </div>
+  <h2>Formulário: </h2>
+  <ul>
+    <li>
+      <h2>Nome: </h2>
+      <input type="string" [ngModel]="nome">
+    </li>
+    <li>
+      <h2>Produtividade: </h2>
+      <input type="number" [ngModel]="produtividade">
+    </li>
+    <li>
+      <h2>Pontos: </h2>
+      <input type="number" [ngModel]="pontos">
+    </li>
+    <li>
+      <h2>Bug: </h2>
+      <input type="number" [ngModel]="bug">
+    </li>
+    <li>
+      <h2>Clean Code: </h2>
+      <input type="number" [ngModel]="cleanCode">
+    </li>
+    <li>
+      <h2>Aux Dev: </h2>
+      <input type="number" [ngModel]="auxDev">
+    </li>
+    <li>
+      <button (click)="inserirMembro()"> Inserir Dados </button>
+    </li>
+  </ul>
+  
+  <table>
+      <tr>
+          <th>Nome</th>
+          <th>Produtividade</th>
+          <th>Pontos</th>
+          <th>Bugs</th>
+          <th>Clean Code</th>
+          <th>Aux. Desenv.</th>
+          <th>Total</th>
+      </tr>
+      <tr *ngFor="let row of equipe">
+          <td>{{row.nome}}</td>
+          <td>{{row.prod}}</td>
+          <td>{{row.pontos}}</td>
+          <td>{{row.bug}}</td>
+          <td>{{row.cleanCode}}</td>
+          <td>{{row.auxDev}}</td>
+          <td>{{row.total}}</td>
+      </tr>
+  </table>>
