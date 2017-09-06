@@ -1,0 +1,61 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <h1>
+      Ranking de Equipe
+    </h1>
+  </div>
+  <h2>Formulário: </h2>
+  <ul>
+    <li>
+      <h3>Nome: 
+        <input type="string" [(ngModel)]="nome">
+      </h3>
+    </li>
+    <li>
+      <h3>Produtividade: 
+        <input type="number" step="0.5" min="0" placeholder="0" [(ngModel)]="produtividade">
+      </h3>
+    </li>
+    <li>
+      <h3>Pontos: 
+        <input type="number" step="0.5" min="0" placeholder="0" [(ngModel)]="pontos">
+      </h3>
+    </li>
+    <li>
+      <h3>Bug: 
+        <input type="number" step="0.5" min="0" placeholder="0" [(ngModel)]="bug">
+      </h3>
+    </li>
+    <li>
+      <h3>Clean Code: 
+        <input type="number" step="0.5" min="0" placeholder="0" [(ngModel)]="cleanCode">
+      </h3>
+    </li>
+    <li>
+      <h3>Aux Dev: 
+        <input type="number" step="0.5" min="0" placeholder="0" [(ngModel)]="auxDev">
+      </h3>
+    </li>
+    <button (click)="inserirMembro()"> Inserir Dados </button>
+  </ul>
+  
+  <table style="width:100%">
+      <tr>
+          <th>Nome</th>
+          <th>Produtividade</th>
+          <th>Pontos</th>
+          <th>Bugs</th>
+          <th>Clean Code</th>
+          <th>Aux. Desenv.</th>
+          <th>Total</th>
+      </tr>
+      <tr *ngFor="let row of equipe">
+        <td>{{row.nome}}</td>
+        <td>{{row.prod}}</td>
+        <td>{{row.pontos}}</td>
+        <td>{{row.bug}}</td>
+        <td>{{row.cleanCode}}</td>
+        <td>{{row.auxDev}}</td>
+        <td>{{row.total}}</td>
+    </tr>
+  </table>
