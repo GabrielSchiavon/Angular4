@@ -1,3 +1,31 @@
-<p>
-  equipes works!
-</p>
+<p></p>
+<p-panel>
+  <p-header>
+    Cadastro de Equipe
+  </p-header>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Nome:</span>
+    <input type="text" pInputText [(ngModel)]="campoNome" />
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Cadastrar" (click)="cadastrarEquipe()"></button>
+  </p-footer>
+</p-panel>
+
+<p></p>
+
+<p-panel>
+  <p-header>
+    Listagem de Equipes
+  </p-header>
+  <p-accordion>
+    <p-accordionTab header="{{ equipe.nome }}" *ngFor="let equipe of equipes">
+      <button pButton type="button" label="Add Membro" icon="fa fa-plus"></button>
+      <div *ngFor="let membro of equipe.membros">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i> {{ membro.nome }}
+        <button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>
+        <button pButton type="button" label="Excluir" icon="fa-trash-o" (click)="removerMembro(equipe, membro)"></button>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</p-panel>

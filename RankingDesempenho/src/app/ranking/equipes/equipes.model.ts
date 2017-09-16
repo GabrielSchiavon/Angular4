@@ -1,9 +1,17 @@
 import { Membro } from "../membros/membro.model";
 
 export class Equipe {
-    
-    constructor (private id: string, private nome:string, private membros: Membro[]) {
+    id: string;
+    nome:string;
+    membros: Membro[];
+
+    constructor (id?: string, nome?: string, membros?: Membro[]) {
         this.membros = [];
+        if (id) {
+            this.id = id;
+            this.nome = nome;
+            this.membros = membros;
+        }
     }
 
 }

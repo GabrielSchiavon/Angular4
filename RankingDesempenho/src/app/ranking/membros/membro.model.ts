@@ -6,8 +6,19 @@ export class Membro {
     private login: string;
     private senha: string;
 
-    constructor () {
-        this.login = "";
-        this.senha = "";
+    constructor (id?: string, fkidequipe?: number, nome?:string, 
+        cpf?:number, login?: string, senha?: string,) {
+        
+        if (id) {
+            this.id = id;
+            this.fkidequipe = fkidequipe;
+            this.nome = nome;
+            this.cpf = cpf;
+            this.login = login;
+            this.senha = senha;
+        } else {
+            this.login = "";
+            this.senha = "";
+        }
     }
 }
