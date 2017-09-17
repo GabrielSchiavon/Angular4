@@ -1,3 +1,43 @@
-<p>
-  membros works!
-</p>
+<p></p>
+<p-panel>
+  <p-header>
+    Cadastro de Membros
+  </p-header>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Nome:</span>
+    <input type="text" pInputText [(ngModel)]="campoNome" />
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">CPF:</span>
+    <input type="text" pInputText [(ngModel)]="campoCPF" />
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Login:</span>
+    <input type="text" pInputText [(ngModel)]="campoLogin" />
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Senha:</span>
+    <input type="text" pInputText [(ngModel)]="campoSenha" />
+  </div>
+  <p-dropdown [options]="equipes" [(ngModel)]="campoEquipe"></p-dropdown>
+  <p-footer>
+    <button pButton type="button" label="Cadastrar" (click)="cadastrarMembro()"></button>
+  </p-footer>
+</p-panel>
+
+<p></p>
+
+<p-panel>
+  <p-header>
+    Listagem de Membros
+  </p-header>
+  <p-accordion>
+    <p-accordionTab header="{{ membro.nome }}" *ngFor="let membro of membros">
+      <div>
+        <i class="fa fa-chevron-right" aria-hidden="true"></i> Equipe: {{ membro.fkidequipe }}
+        <button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>
+        <button pButton type="button" label="Excluir" icon="fa-trash-o" (click)="removerMembro(membro)"></button>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</p-panel>

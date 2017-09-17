@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StepsModule, MenubarModule, ButtonModule, PanelModule, AccordionModule, InputTextModule } from 'primeng/primeng';
+import { StepsModule, MenubarModule, ButtonModule, PanelModule, AccordionModule, InputTextModule, DropdownModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { ProjetosComponent } from "./ranking/projetos/projetos.component";
     PanelModule,
     AccordionModule,
     InputTextModule,
+    DropdownModule,
     AppRoutingModule
   ],
   providers: [],
