@@ -1,17 +1,26 @@
 import { Membro } from "../membros/membro.model";
 
 export class Equipe {
-    id: string;
-    nome:string;
-    membros: Membro[];
-
-    constructor (id?: string, nome?: string, membros?: Membro[]) {
+    
+    constructor (private id: string, private nome:string, private membros: Membro[]) {
         this.membros = [];
-        if (id) {
-            this.id = id;
-            this.nome = nome;
-            this.membros = membros;
-        }
     }
+
+    stringify(){
+        return `{id:${this.id},nome:${this.nome}}`;
+    }
+
+    getId(){
+        return this.id;
+    }
+
+    getNome(){
+        return this.nome;
+    }
+
+    getMembros(){
+        return this.membros;
+    }
+
 
 }
