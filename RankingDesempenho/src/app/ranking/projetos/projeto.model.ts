@@ -1,7 +1,7 @@
 export class Projeto {
-    private id: string;
-    private fkidequipe: number; 
-    private nomenclatura:string; 
+    public id: string;
+    public fkidequipe: number; 
+    public nomenclatura:string; 
 
     constructor (id?: string, fkidequipe?: number, nomenclatura?:string) {
         this.id = id;
@@ -9,15 +9,4 @@ export class Projeto {
         this.nomenclatura = nomenclatura;
     }
 
-    getId(){
-        return this.id;
-    }
-
-    getFkidequipe(){
-        return this.fkidequipe;
-    }
-
-    getNomenclatura(){
-        return this.nomenclatura;
-    }
 }

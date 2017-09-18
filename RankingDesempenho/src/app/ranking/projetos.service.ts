@@ -26,14 +26,14 @@ export class ProjetosService {
   }
 
   removeProjeto(projeto:Projeto) {
-    return this.http.delete(`${this.baseUrl}/${this.collection}/${projeto.getId()}.json`)
+    return this.http.delete(`${this.baseUrl}/${this.collection}/${projeto.id}.json`)
       .toPromise()
       .catch(this.errorHandler);
   }
 
   updateProjeto(projeto:Projeto) {
     const json = JSON.stringify(projeto); 
-    return this.http.patch(`${this.baseUrl}/${this.collection}/${projeto.getId()}.json`, json)
+    return this.http.patch(`${this.baseUrl}/${this.collection}/${projeto.id}.json`, json)
       .toPromise()
       .catch(this.errorHandler);
   }

@@ -13,19 +13,24 @@ export class AppComponent {
   ngOnInit() {
     this.items = [
       {
+        label: 'Home',
+        icon: 'fa fa-home',
+        routerLink: ['/classificacao']
+      },
+      {
         label: 'Projetos',
         icon: 'fa-product-hunt',
-        routerLink: ['/projetos']
+        routerLink: ['/projeto']
       },
       {
         label: 'Equipes',
         icon: 'fa-users',
-        routerLink: ['/equipes']
+        routerLink: ['/equipe']
       },
       {
         label: 'Membros',
         icon: 'fa-user',
-        routerLink: ['/membros']
+        routerLink: ['/membro']
       }
     ];
   }
