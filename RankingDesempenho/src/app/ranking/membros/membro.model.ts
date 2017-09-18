@@ -21,4 +21,28 @@ export class Membro {
             this.senha = "";
         }
     }
+
+    getId(){
+        return this.id;
+    }
+
+    getFkidequipe(){
+        return this.fkidequipe;
+    }
+
+    getNome(){
+        return this.nome;
+    }
+
+    getCpf(){
+        return this.cpf;
+    }
+
+    getLogin(){
+        return this.login;
+    }
+
+    getSenha(){
+        return this.senha;
+    }
 }
