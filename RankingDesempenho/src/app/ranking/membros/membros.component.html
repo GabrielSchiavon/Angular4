@@ -19,7 +19,10 @@
     <span class="ui-inputgroup-addon">Senha:</span>
     <input type="text" pInputText [(ngModel)]="campoSenha" />
   </div>
-  <p-dropdown [options]="equipes" [(ngModel)]="campoEquipe"></p-dropdown>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Equipe:</span>
+    <p-dropdown [options]="equipes" [(ngModel)]="campoEquipe" tabindex=0></p-dropdown>
+  </div>
   <p-footer>
     <button pButton type="button" label="Cadastrar" (click)="cadastrarMembro()"></button>
   </p-footer>

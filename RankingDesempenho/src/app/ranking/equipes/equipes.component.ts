@@ -12,17 +12,19 @@ import { Membro } from "../membros/membro.model";
 export class EquipesComponent implements OnInit {
 
   public equipes: Equipe[];
-  public e: Equipe = new Equipe("1", "Equipe Web", []);
-  public m: Membro = new Membro("1", 1, "Membro de Teste", 9, "admin", "admin");
-  public campoNome: string = "";  
-  constructor() { 
-    this.equipes = [];
+  public campoNome: string = "";
+
+  constructor(private equipeService: EquipesService) { 
+    this.recarregarEquipe();
     this.campoNome = "";
-    this.e.membros.push(this.m);
-    this.equipes.push(this.e);
   }
 
   ngOnInit() {
+    /*
+      - exclusão de equipes;
+      - alteração de equipes;
+      - inserção de membro na equipe;
+    */
   }
 
   removerMembro(equipe: Equipe, membro: Membro) {
@@ -30,9 +32,14 @@ export class EquipesComponent implements OnInit {
   }
 
   cadastrarEquipe() {
-    let equipe: Equipe = new Equipe((this.equipes.length+1).toString(), this.campoNome, []);
-    this.equipes.push(equipe);
-    console.log(this.equipes);
+    let equipe: Equipe = new Equipe("1", this.campoNome, []);
+    this.equipeService.addEquipe(equipe)
+      .then( () => this.recarregarEquipe() )
+      .catch( () => console.log("Erro") );
   }
 
+  recarregarEquipe() {
+    return this.equipeService.getEquipes()
+      .then( (equipes:Equipe[]) => this.equipes = equipes);
+  }
 }

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {Equipe} from "./equipes/equipes.model";
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class EquipesService {
 
-  errorHandler = error => console.error('EquipeService error', error);
-  private baseUrl = 'https://rankingdesempenho.firebaseio.com/';
+  errorHandler = error => console.error('EquipesService error', error);
+  private baseUrl = 'https://ranking-de-desempenho.firebaseio.com/';
   private collection = 'equipes';
 
   constructor(private http: Http) { }
 
-  addEquipe(equipe:Equipe) {
-    const json = equipe.stringify();
+  addEquipe(equipe) {
+    const json = JSON.stringify(equipe);
+    console.log(json);
     return this.http.post(`${this.baseUrl}/${this.collection}.json`, json)
       .toPromise()
       .catch(this.errorHandler);
@@ -25,26 +26,28 @@ export class EquipesService {
       .catch(this.errorHandler);
   }
 
-  removeEquipe(equipe:Equipe) {
-    return this.http.delete(`${this.baseUrl}/${this.collection}/${equipe.getId()}.json`)
+  removeEquipe(equipe) {
+    return this.http.delete(`${this.baseUrl}/${this.collection}/${equipe.id}.json`)
       .toPromise()
       .catch(this.errorHandler);
   }
 
-  updateEquipe(equipe:Equipe) {
-    const json = equipe.stringify(); 
-    return this.http.patch(`${this.baseUrl}/${this.collection}/${equipe.getId()}.json`, json)
+  updateEquipe(equipe) {
+    const json = JSON.stringify({equipe});
+    return this.http.patch(`${this.baseUrl}/${this.collection}/${equipe.id}.json`, json)
       .toPromise()
       .catch(this.errorHandler);
   }
 
   private convert(parsedResponse) {
-    return Object.keys(parsedResponse)
+    if (parsedResponse) {
+      return Object.keys(parsedResponse)
       .map(id => ({
         id: id,
-        nome: parsedResponse[id].nome
-      }))
-      .sort((a, b) => a.nome.localeCompare(b.nome));
+        nome: parsedResponse[id].nome,
+        membros: []
+      }));
+    }    
   }
 
 }
