@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectItem} from 'primeng/primeng';
 
+import { MembrosService } from '../membros.service';
+import { EquipesService } from "../equipes.service";
+
 import { Equipe } from "../equipes/equipes.model";
 import { Membro } from "./membro.model";
 
@@ -9,6 +12,7 @@ import { Membro } from "./membro.model";
   templateUrl: './membros.component.html',
   styleUrls: ['./membros.component.css']
 })
+
 export class MembrosComponent implements OnInit {
   campoNome: string;
   campoCPF: string;
@@ -17,24 +21,25 @@ export class MembrosComponent implements OnInit {
   campoEquipe: string;
   equipes: SelectItem[];
   membros: Membro[];
+  equipesCadastradas: Equipe[];
 
-  constructor() {
+  constructor(private membroService: MembrosService, private equipeService: EquipesService) {
     this.campoNome = "";
     this.campoCPF = "";
     this.campoLogin = "";
     this.campoSenha = "";
-    this.equipes = [{label: 'Equipe Web', value:1}];
-    this.membros = [];
-    this.membros.push(new Membro("1", this.equipes[0].value, "Jose", 999, "admin", "admin"));
+    this.equipes = [];
+    this.carregarEquipesCadastradas();
+    this.recarregarMembro()
+    //this.membros.push(new Membro("1", this.equipes[0].value, "Jose", 999, "admin", "admin"));
    }
 
   ngOnInit() {
     /* TODO:
-        - Buscar equipes no banco de dados e atribuir no array de equipes;
-        - Buscar membros no banco de dados e atribuir no array de membros;
+        - exclusão de membros;
+        - alteração de membros;
+        - inserção no projeto ao adicionar membro;
     */
-    //this.equipes = buscarNoBanco();
-    //this.membros = buscarNoBanco();
   }
 
   removerMembro(membro: Membro) {
@@ -42,8 +47,33 @@ export class MembrosComponent implements OnInit {
   }
 
   cadastrarMembro() {
-    let membro: Membro = new Membro((this.membros.length + 1).toString(), 1, this.campoNome, Number(this.campoCPF), this.campoLogin, this.campoSenha);
-    this.membros.push(membro);
-    console.log(this.membros);
+    let membro: Membro = new Membro("1", 1, this.campoNome, Number(this.campoCPF), this.campoLogin, this.campoSenha);
+    this.membroService.addMembro(membro)
+    .then( () => this.recarregarMembro() )
+    .catch( () => console.log("Erro") );
+  }
+
+  recarregarMembro() {
+    return this.membroService.getMembros()
+      .then( (membros: Membro[]) => this.membros = membros);
+  }
+
+  carregarEquipesCadastradas() {
+    return this.equipeService.getEquipes()
+      .then( (equipes:Equipe[]) => {
+        if (typeof equipes !== undefined) {
+          this.equipesCadastradas = equipes;
+          console.log(this.equipesCadastradas);
+          this.preencheListaEquipes(this.equipesCadastradas);
+        }
+      });
+  }
+
+  preencheListaEquipes(equipes: Equipe[]) {
+    for (let e of equipes) {
+      this.equipes.push(
+        { label: e.nome, value: e }
+      );
+    }
   }
 }
