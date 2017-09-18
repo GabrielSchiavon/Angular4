@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from 'primeng/primeng';
+import { SelectItem } from 'primeng/primeng';
 
 import { MembrosService } from '../membros.service';
 import { EquipesService } from "../equipes.service";
@@ -18,10 +18,12 @@ export class MembrosComponent implements OnInit {
   campoCPF: string;
   campoLogin: string;
   campoSenha: string;
-  campoEquipe: string;
+  campoEquipe: Equipe;
   equipes: SelectItem[];
   membros: Membro[];
   equipesCadastradas: Equipe[];
+
+  alteracaoMembro: boolean;
 
   constructor(private membroService: MembrosService, private equipeService: EquipesService) {
     this.campoNome = "";
@@ -29,41 +31,87 @@ export class MembrosComponent implements OnInit {
     this.campoLogin = "";
     this.campoSenha = "";
     this.equipes = [];
+    this.alteracaoMembro = false;
     this.carregarEquipesCadastradas();
-    this.recarregarMembro()
-    //this.membros.push(new Membro("1", this.equipes[0].value, "Jose", 999, "admin", "admin"));
-   }
+    this.recarregarMembro();
+  }
 
   ngOnInit() {
     /* TODO:
-        - exclusão de membros;
-        - alteração de membros;
         - inserção no projeto ao adicionar membro;
     */
   }
 
-  removerMembro(membro: Membro) {
-    this.membros = this.membros.filter(m => m != membro);
+  salvarMembro() {
+    console.log(this.campoEquipe);
+    let membro: Membro = new Membro("1", 1, this.campoNome, Number(this.campoCPF), this.campoLogin, this.campoSenha);
+    if (this.alteracaoMembro) { //<-- alteração alteracao de membros
+      console.log("entrou na alteração");
+      this.membroService.updateMembro(membro)
+        .then(() => {
+          this.recarregarMembro();
+          this.alteracaoMembro = false;
+        })
+        .catch(() => console.log("Erro"));
+    } else {  //<-- inserção de novos membros
+      console.log("entrou na cadastro");
+      this.membroService.addMembro(membro)
+        .then(() => {
+          this.recarregarMembro();
+          //this.inserirMembroEquipe(membro);
+        })
+        .catch(() => console.log("Erro"));
+    }
+    this.limpaCampos();
   }
 
-  cadastrarMembro() {
-    let membro: Membro = new Membro("1", 1, this.campoNome, Number(this.campoCPF), this.campoLogin, this.campoSenha);
-    this.membroService.addMembro(membro)
-    .then( () => this.recarregarMembro() )
-    .catch( () => console.log("Erro") );
+  inserirMembroEquipe(membro: Membro) {
+    this.campoEquipe.membros.push(membro);
+    this.equipeService.updateEquipe(this.campoEquipe)
+      .then(() => {
+        this.carregarEquipesCadastradas();
+      })
+      .catch(() => console.log("Erro ao inserir membro na equipe"));
+  }
+
+  limpaCampos() {
+    this.campoNome = "";
+    this.campoCPF = "";
+    this.campoLogin = "";
+    this.campoSenha = "";
+  }
+
+
+  alterarMembro(membro: Membro) {
+    this.alteracaoMembro = true;
+    this.preencheCampos(membro);
+  }
+
+  private preencheCampos(membro: Membro) {
+    this.campoNome = membro.nome;
+    this.campoCPF = membro.cpf.toString();
+    this.campoLogin = membro.login;
+    this.campoSenha = membro.senha;
+  }
+
+  removerMembro(membro: Membro) {
+    return this.membroService.removeMembro(membro)
+      .then(() => this.recarregarMembro())
+      .catch(() => console.log("Erro ao excluir membro"));
   }
 
   recarregarMembro() {
     return this.membroService.getMembros()
-      .then( (membros: Membro[]) => this.membros = membros);
+      .then((membros: Membro[]) => {
+        this.membros = membros;
+      });
   }
 
   carregarEquipesCadastradas() {
     return this.equipeService.getEquipes()
-      .then( (equipes:Equipe[]) => {
+      .then((equipes: Equipe[]) => {
         if (typeof equipes !== undefined) {
           this.equipesCadastradas = equipes;
-          console.log(this.equipesCadastradas);
           this.preencheListaEquipes(this.equipesCadastradas);
         }
       });
@@ -75,5 +123,6 @@ export class MembrosComponent implements OnInit {
         { label: e.nome, value: e }
       );
     }
+    this.campoEquipe = equipes[0];
   }
 }

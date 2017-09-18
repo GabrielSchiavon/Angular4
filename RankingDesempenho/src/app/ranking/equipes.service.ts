@@ -7,7 +7,7 @@ export class EquipesService {
 
   errorHandler = error => console.error('EquipesService error', error);
   private baseUrl = 'https://ranking-de-desempenho.firebaseio.com/';
-  private collection = 'equipes';
+  private collection = 'equipe';
 
   constructor(private http: Http) { }
 

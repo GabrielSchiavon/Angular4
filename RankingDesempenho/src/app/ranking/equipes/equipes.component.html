@@ -21,7 +21,7 @@
   <p-accordion>
     <p-accordionTab header="{{ equipe.nome }}" *ngFor="let equipe of equipes">
       <button pButton type="button" label="Add Membro" icon="fa fa-plus"></button>
-      <div *ngFor="let membro of equipe.membros">
+      <div *ngFor="let membro of membros">
         <i class="fa fa-chevron-right" aria-hidden="true"></i> {{ membro.nome }}
         <button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>
         <button pButton type="button" label="Excluir" icon="fa-trash-o" (click)="removerMembro(equipe, membro)"></button>

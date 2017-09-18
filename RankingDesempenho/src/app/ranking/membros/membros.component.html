@@ -24,7 +24,7 @@
     <p-dropdown [options]="equipes" [(ngModel)]="campoEquipe" tabindex=0></p-dropdown>
   </div>
   <p-footer>
-    <button pButton type="button" label="Cadastrar" (click)="cadastrarMembro()"></button>
+    <button pButton type="button" label="Cadastrar" (click)="salvarMembro()"></button>
   </p-footer>
 </p-panel>
 
@@ -38,7 +38,7 @@
     <p-accordionTab header="{{ membro.nome }}" *ngFor="let membro of membros">
       <div>
         <i class="fa fa-chevron-right" aria-hidden="true"></i> Equipe: {{ membro.fkidequipe }}
-        <button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>
+        <button pButton type="button" label="Alterar" icon="fa-pencil-square-o" (click)="alterarMembro(membro)" ></button>
         <button pButton type="button" label="Excluir" icon="fa-trash-o" (click)="removerMembro(membro)"></button>
       </div>
     </p-accordionTab>
