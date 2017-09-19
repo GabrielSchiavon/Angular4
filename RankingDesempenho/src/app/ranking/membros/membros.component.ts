@@ -21,6 +21,7 @@ export class MembrosComponent implements OnInit {
   campoEquipe: Equipe;
   equipes: SelectItem[];
   membros: Membro[];
+  totalMembros: number;
   equipesCadastradas: Equipe[];
 
   alteracaoMembro: boolean;
@@ -32,6 +33,7 @@ export class MembrosComponent implements OnInit {
     this.campoSenha = "";
     this.equipes = [];
     this.alteracaoMembro = false;
+    this.totalMembros = 0;
     this.carregarEquipesCadastradas();
     this.recarregarMembro();
   }
@@ -43,8 +45,7 @@ export class MembrosComponent implements OnInit {
   }
 
   salvarMembro() {
-    console.log(this.campoEquipe);
-    let membro: Membro = new Membro("1", 1, this.campoNome, Number(this.campoCPF), this.campoLogin, this.campoSenha);
+    let membro: Membro = new Membro((this.totalMembros+1).toString(), Number(this.campoEquipe.id), this.campoNome, Number(this.campoCPF), this.campoLogin, this.campoSenha);
     if (this.alteracaoMembro) { //<-- alteração alteracao de membros
       console.log("entrou na alteração");
       this.membroService.updateMembro(membro)
@@ -104,6 +105,7 @@ export class MembrosComponent implements OnInit {
     return this.membroService.getMembros()
       .then((membros: Membro[]) => {
         this.membros = membros;
+        this.totalMembros = this.membros.length;
       });
   }
 

@@ -19,12 +19,15 @@
     Listagem de Equipes
   </p-header>
   <p-accordion>
-    <p-accordionTab header="{{ equipe.nome }}" *ngFor="let equipe of equipes">
+    <p-accordionTab header="{{ equipe.nome }}  {{ equipe.id }}" *ngFor="let equipe of equipes">
       <button pButton type="button" label="Add Membro" icon="fa fa-plus"></button>
+      <p></p>
       <div *ngFor="let membro of membros">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i> {{ membro.nome }}
-        <button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>
-        <button pButton type="button" label="Excluir" icon="fa-trash-o" (click)="removerMembro(equipe, membro)"></button>
+        <div *ngIf="membro.fkidequipe == equipe.id">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i> {{ membro.nome }}
+          <!--<button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>-->
+          <button pButton type="button" label="Excluir da equipe" icon="fa-trash-o" (click)="removerMembro(equipe, membro)"></button>
+      </div>
       </div>
     </p-accordionTab>
   </p-accordion>

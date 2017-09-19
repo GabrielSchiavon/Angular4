@@ -43,7 +43,7 @@ export class EquipesService {
     if (parsedResponse) {
       return Object.keys(parsedResponse)
       .map(id => ({
-        id: id,
+        id: parsedResponse[id].id,
         nome: parsedResponse[id].nome,
         membros: []
       }));

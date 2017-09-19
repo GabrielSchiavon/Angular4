@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { EquipesComponent } from "./ranking/equipes/equipes.component";
 import { MembrosComponent } from "./ranking/membros/membros.component";
 import { ProjetosComponent } from "./ranking/projetos/projetos.component";
+import { ClassificacaoComponent } from "./ranking/classificacao/classificacao.component";
 
 import { EquipesService } from './ranking/equipes.service';
 import { MembrosService } from './ranking/membros.service';
@@ -20,7 +21,8 @@ import { ProjetosService } from './ranking/projetos.service';
     AppComponent,
     EquipesComponent,
     MembrosComponent,
-    ProjetosComponent
+    ProjetosComponent,
+    ClassificacaoComponent
   ],
   imports: [
     BrowserModule,

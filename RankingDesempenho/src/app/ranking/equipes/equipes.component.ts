@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+
 import { EquipesService } from "../equipes.service";
 import { MembrosService } from "../membros.service";
 
@@ -17,10 +19,10 @@ export class EquipesComponent implements OnInit {
   public equipes: Equipe[];
   public campoNome: string = "";
   membrosEquipe: Membro[];
-  equipeMembro: any[];
+  totalEquipes: number;
 
   constructor(private equipeService: EquipesService, private membroService: MembrosService) {
-    this.equipeMembro = [];
+    this.totalEquipes = 0;
     this.recarregarEquipe();
     this.campoNome = "";
   }
@@ -35,11 +37,15 @@ export class EquipesComponent implements OnInit {
   }
 
   removerMembro(equipe: Equipe, membro: Membro) {
-    equipe.membros = equipe.membros.filter(m => m != membro);
+    membro.fkidequipe = 0;
+    this.membroService.updateMembro(membro)
+      .then( () => this.recarregarMembros())
+      .catch( () => console.log("Erro ao excluir membro da equipe"));
+    //equipe.membros = equipe.membros.filter(m => m != membro);
   }
 
   cadastrarEquipe() {
-    let equipe: Equipe = new Equipe("1", this.campoNome, []);
+    let equipe: Equipe = new Equipe(this.totalEquipes.toString(), this.campoNome, []);
     this.equipeService.addEquipe(equipe)
       .then(() => this.recarregarEquipe())
       .catch(() => console.log("Erro"));
@@ -50,6 +56,7 @@ export class EquipesComponent implements OnInit {
       .then((equipes: Equipe[]) => {
         this.equipes = equipes;
         this.recarregarMembros();
+        this.totalEquipes = this.equipes.length;
       });
   }
 
