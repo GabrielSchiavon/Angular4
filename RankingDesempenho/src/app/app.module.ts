@@ -15,6 +15,8 @@ import { ClassificacaoComponent } from "./ranking/classificacao/classificacao.co
 import { EquipesService } from './ranking/equipes.service';
 import { MembrosService } from './ranking/membros.service';
 import { ProjetosService } from './ranking/projetos.service';
+import { LoginComponent } from './login/login/login.component';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ProjetosService } from './ranking/projetos.service';
     EquipesComponent,
     MembrosComponent,
     ProjetosComponent,
-    ClassificacaoComponent
+    ClassificacaoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { ProjetosService } from './ranking/projetos.service';
   providers: [
     EquipesService, 
     MembrosService, 
-    ProjetosService
+    ProjetosService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

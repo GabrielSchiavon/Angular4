@@ -1,0 +1,10 @@
+.ui-panel {
+    width: 20%;
+    position: relative;
+    
+    
+    bottom: 50%;
+    top: 50%;
+    left: 35%;
+    float: center;
+}
