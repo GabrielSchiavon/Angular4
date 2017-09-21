@@ -12,6 +12,11 @@ import { ClassificacaoComponent } from './classificacao/classificacao.component'
     CommonModule,
     RankingRoutingModule
   ],
-  declarations: [EquipesComponent, MembrosComponent, ProjetosComponent, ClassificacaoComponent]
+  declarations: [
+    EquipesComponent, 
+    MembrosComponent, 
+    ProjetosComponent, 
+    ClassificacaoComponent
+  ]
 })
 export class RankingModule { }

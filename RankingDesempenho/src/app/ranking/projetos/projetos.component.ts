@@ -16,6 +16,7 @@ import { Equipe } from "../equipes/equipes.model";
 })
 export class ProjetosComponent implements OnInit {
   campoNomenclatura: string;
+  campoEquipe: Equipe;
   equipes: SelectItem[];
   projetos: Projeto[];
   equipesCadastradas: Equipe[];
@@ -56,7 +57,6 @@ export class ProjetosComponent implements OnInit {
       .then( (equipes:Equipe[]) => {
         if (typeof equipes !== undefined) {
           this.equipesCadastradas = equipes;
-          console.log(this.equipesCadastradas);
           this.preencheListaEquipes(this.equipesCadastradas);
         }
       });

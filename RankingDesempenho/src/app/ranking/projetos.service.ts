@@ -6,7 +6,7 @@ import {Projeto} from "./projetos/projeto.model";
 export class ProjetosService {
 
   errorHandler = error => console.error('ProjetoService error', error);
-  private baseUrl = 'https://rankingdesempenho.firebaseio.com/';
+  private baseUrl = 'https://ranking-de-desempenho.firebaseio.com/';
   private collection = 'projetos';
 
   constructor(private http: Http) { }

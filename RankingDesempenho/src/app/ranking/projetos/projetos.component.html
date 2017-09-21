@@ -25,8 +25,8 @@
   <p-accordion>
     <p-accordionTab header="{{ projeto.nomenclatura }}" *ngFor="let projeto of projetos">
       <div>
-        <i class="fa fa-chevron-right" aria-hidden="true"></i> Projeto: {{ projeto.nomenclatura }}
-        <button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button>
+        <i class="fa fa-chevron-right" aria-hidden="true"></i> Equipe Responsável: {{ projeto.fkidequipe }}
+        <!--<button pButton type="button" label="Alterar" icon="fa-pencil-square-o"></button> -->
         <button pButton type="button" label="Excluir" icon="fa-trash-o" (click)="removerProjeto(projeto)"></button>
       </div>
     </p-accordionTab>

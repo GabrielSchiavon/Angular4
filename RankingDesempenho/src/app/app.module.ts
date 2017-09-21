@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { StepsModule, MenubarModule, ButtonModule, PanelModule, AccordionModule, InputTextModule, DropdownModule } from 'primeng/primeng';
+import { StepsModule, MenubarModule, ButtonModule, PanelModule, AccordionModule, InputTextModule, DropdownModule, SpinnerModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +39,7 @@ import { LoginService } from './login/login.service';
     AccordionModule,
     InputTextModule,
     DropdownModule,
+    SpinnerModule,
     AppRoutingModule
   ],
   providers: [

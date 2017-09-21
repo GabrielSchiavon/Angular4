@@ -1,3 +1,69 @@
-<p>
-  classificacao works!
-</p>
+<p></p>
+<p-panel>
+  <p-header>
+    Cadastro de Classificação
+  </p-header>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Projeto:</span>
+    <p-dropdown [options]="projetosSelect" [(ngModel)]="campoProjeto" tabindex=0></p-dropdown>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Equipe:</span>
+    <p-dropdown [options]="equipes" [(ngModel)]="campoEquipe" tabindex=0></p-dropdown>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">membro:</span>
+    <p-dropdown [options]="membros" [(ngModel)]="campoMembro" tabindex=0></p-dropdown>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Produividade:</span>
+    <p-spinner size="5" [(ngModel)]="campoProdutividade" type="number" [step]="0.5" [min]="0" placeholder="0"></p-spinner>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Pontos:</span>
+    <p-spinner size="4" [(ngModel)]="campoPontos" type="number" [step]="0.5" [min]="0" placeholder="0"></p-spinner>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Bug:</span>
+    <p-spinner size="4" [(ngModel)]="campoBug" type="number" [step]="0.5" [min]="0" placeholder="0"></p-spinner>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Clean Code:</span>
+    <p-spinner size="4" [(ngModel)]="campoCleanCode" type="number" [step]="0.5" [min]="0" placeholder="0"></p-spinner>
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">Aux. Desenv:</span>
+    <p-spinner size="4" [(ngModel)]="campoAuxDev" type="number" [step]="0.5" [min]="0" placeholder="0"></p-spinner>
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Salvar" (click)="cadastrarClassificacao()"></button>
+  </p-footer>
+</p-panel>
+
+<p></p>
+
+<p-panel>
+  <p-header>
+    Listagem de Classificação
+  </p-header>
+  <table style="width:100%">
+    <tr>
+      <th>Nome</th>
+      <th>Produtividade</th>
+      <th>Pontos</th>
+      <th>Bugs</th>
+      <th>Clean Code</th>
+      <th>Aux. Desenv.</th>
+      <th>Total</th>
+    </tr>
+    <tr *ngFor="let row of equipe">
+      <td>{{row.nome}}</td>
+      <td>{{row.prod}}</td>
+      <td>{{row.pontos}}</td>
+      <td>{{row.bug}}</td>
+      <td>{{row.cleanCode}}</td>
+      <td>{{row.auxDev}}</td>
+      <td>{{row.total}}</td>
+    </tr>
+  </table>
+</p-panel>
